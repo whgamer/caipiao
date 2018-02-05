@@ -32,7 +32,7 @@ tmp = table.split('<tr \r\n\t\t                  onmouseout=', 1)
 soup = bs4.BeautifulSoup(table, "lxml")
 elems =soup.select('td')
 
-#获取篮球
+#获取蓝球
 def getBuleBall(elems):
     ssq_blueRegex = re.compile(r'"blueColor sz12">\d+')
     blueball = ssq_blueRegex.findall(str(elems))
@@ -52,15 +52,22 @@ def getRedBall(elems):
     aList2 = list(redball2)  # 直接正则匹配不行？此处存疑
     # print('redball2 遍历: \n')
     list_redhm = []  # 添加保存篮球号码
+    list_CountFirst =[]#添加一等奖注数量
+    str_redball =""
+    str_first =""
     for index, Num in enumerate(aList2):
         # i += 1
+        if (index + 1) % 7 != 0 :
+            str_redball = str_redball +" "+ str(Num)  # 此处 是不是可以 +=
         if (index + 1) % 7 == 0 and index > 0:
             # print('一等奖注' + Num)
+            str_first = str(Num)
+            list_CountFirst.append(str_first)
+            list_redhm.append(str_redball)
+            str_redball =""
+            str_first = ""
             continue
-        # print(str(Num) + ' ', end='')  # str(i )+' '+str(index)+' ',
-        list_redhm.append(Num)
-    # print(list_redhm)
-    return list_redhm
+    return (list_redhm,list_CountFirst)
 #获取前几位号码
 def getCountNum(count,list_redhm,list_bluehm):
     num_count = Counter(list_redhm)
@@ -76,11 +83,12 @@ def getCountNum(count,list_redhm,list_bluehm):
 def getQs(elems):
     ssq_rqRegex = re.compile(r'20\d\d\d\d\d')
     qs_ssq = ssq_rqRegex.findall(str(elems))
-    print(qs_ssq)
+    # print(qs_ssq)
+    return qs_ssq
 #获取最近一期号码
 def getLastLottery():
     trs = tmp[1]
-    tr = trs[: trs.find('</tr>')]
+    tr = trs[: trs.find('</tr>',1)]
     # print(tr)
     # for i in [0,29]:
     number = tr.split('<td   >')[1].split('</td>')[0]
@@ -93,8 +101,15 @@ def getLastLottery():
     print('蓝球：', end='')
     blue = tr.split('<td  class="blueColor sz12" >')[1].split('</td>')[0]
     print(blue)
-getCountNum(6,getBuleBall(elems),getRedBall(elems))
+(list_buleballball,ydj)=getRedBall(elems)
+getCountNum(6,getBuleBall(elems),list_buleballball)
+(list_Blue_ball )= getBuleBall(elems)
+(list_Red_ball,ydj) =getRedBall(elems)
+list_qs = getQs(elems)
+for (buleball,redball ,qs,ydjCount) in zip(list_Blue_ball,list_Red_ball ,list_qs,ydj):
+    print('第'+str(qs)+'期：红球-'+str(redball)+'蓝球：'+str(buleball)+' 一等奖注：'+str(ydjCount))
 
+getLastLottery()
 dict_ssq ={'qs':'','redball':'','buleball':'','ydj':''}#创建一个字典存放双色球信息
 
 
