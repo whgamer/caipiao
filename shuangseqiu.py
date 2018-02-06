@@ -68,6 +68,29 @@ def getRedBall(elems):
             str_first = ""
             continue
     return (list_redhm,list_CountFirst)
+# 返回单个值得红球球号码
+def getRedBallAlone(elems):
+    ssq_redRegex = re.compile(r'"redColor sz12">\d+')
+    redball = ssq_redRegex.findall(str(elems))
+    ssq_redRegex1 = re.compile(r'(>\d+)')
+    redball1 = ssq_redRegex1.findall(str(redball))
+    aList = list(redball1)  # 直接正则匹配不行？此处存疑
+    ssq_redRegex2 = re.compile(r'(\d+)')
+    redball2 = ssq_redRegex2.findall(str(aList))
+    aList2 = list(redball2)  # 直接正则匹配不行？此处存疑
+    # print('redball2 遍历: \n')
+    list_redhm = []  # 添加保存篮球号码
+    str_redball =""
+
+    for index, Num in enumerate(aList2):
+        # i += 1
+        if (index + 1) % 7 != 0 :
+            list_redhm.append(Num)  # 此处 是不是可以 +=
+        if (index + 1) % 7 == 0 and index > 0:
+            # print('一等奖注' + Num)
+
+            continue
+    return (list_redhm)
 #获取前几位号码
 def getCountNum(count,list_redhm,list_bluehm):
     num_count = Counter(list_redhm)
@@ -110,6 +133,7 @@ for (buleball,redball ,qs,ydjCount) in zip(list_Blue_ball,list_Red_ball ,list_qs
     print('第'+str(qs)+'期：红球-'+str(redball)+'蓝球：'+str(buleball)+' 一等奖注：'+str(ydjCount))
 
 getLastLottery()
-dict_ssq ={'qs':'','redball':'','buleball':'','ydj':''}#创建一个字典存放双色球信息
+lis_bal_red=getRedBallAlone(elems)
+print(str(lis_bal_red))
 
 
