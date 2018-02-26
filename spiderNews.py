@@ -1,7 +1,7 @@
 #python3
 import scrapy
 import hashlib
-# from tutorial.item
+from tutorial.items  import JinLuoSiItem
 from scrapy.http import Request
 from scrapy.selector import HtmlXPathSelector
 
@@ -23,4 +23,4 @@ class WsjSpider (scrapy.spiders.Spider):
             WsjSpider.url_set.add(md5_url)
             hxs =HtmlXPathSelector(reponse)
             if reponse.url.startswith('http://www.whws.gov.cn/col/col29396/index.html'):
-                item =
+                item[]=;
