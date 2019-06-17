@@ -1,0 +1,7 @@
+from googletrans import Translator
+translator = Translator()
+str_momo = open('d:\高血压.txt')# 文件内容不能太长 否则会提示错误
+# print(str_momo.read())
+print(translator.translate(str_momo.read(), dest='zh-CN').text)
+str_momo.close()
+# // 输出结果:  on Sunday
