@@ -1,3 +1,4 @@
+# pip install translate
 from googletrans import Translator
 translator = Translator()
 str_momo = open('d:\高血压.txt')# 文件内容不能太长 否则会提示错误
