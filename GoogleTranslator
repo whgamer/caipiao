@@ -1,8 +1,23 @@
-# pip install translate
+import pickle# not neseaary
 from googletrans import Translator
+#处理长文本内容 用‘.’进行断句，不严谨，后期考虑优化问题，先实现效果再说
+def findSubstring(string, substring, times):
+    current = 0
+    for i in range(1, times + 1):
+        current = string.find(substring, current + 1)
+        if current == -1:  return -1
+
+    return current
 translator = Translator()
-str_momo = open('d:\高血压.txt')# 文件内容不能太长 否则会提示错误
-# print(str_momo.read())
-print(translator.translate(str_momo.read(), dest='zh-CN').text)
+data =''
+str_momo = open('d:\高血压.txt')
+str_source =str_momo.read()
+s = str_source
+begin = 0
+for i in range(1,s.count('.')):
+  # print(str_momo.read())
+  str_momo_temp_index =findSubstring(s, '.', i)
+  print(translator.translate(s[begin:str_momo_temp_index], dest='zh-CN').text)
+  begin = str_momo_temp_index + 1
 str_momo.close()
 # // 输出结果:  on Sunday
