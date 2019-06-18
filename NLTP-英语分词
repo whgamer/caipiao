@@ -1,0 +1,24 @@
+import nltk.data
+import nltk
+nltk.download('punkt')
+def stripTags(s):
+    intag = [False]
+    def chk(c):
+        if intag[0]:
+            intag[0] = (c != '>')
+            return False
+        elif c == '<':
+            intag[0] = True
+            return False
+        return True
+    return ''.join(c for c in s if chk(c))
+file = open("d:\高血压.txt")
+while 1:
+    line = file.readline()
+    if not line:
+        break
+    result = stripTags(line)
+    sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
+    file2 = open("d:\outputs.txt", "a+")
+    file2.write('\n'.join(sent_detector.tokenize(result.strip())))
+    file2.close();
