@@ -1,9 +1,9 @@
-import matplotlib.pyplot as plt
+﻿import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 from scipy.misc import imread
 import jieba
 #.txt
-with open('禅与摩托车维修艺术.txt','rt') as f:
+with open('sd-stu1.txt','rt', encoding='UTF-8') as f:
     data =f.read()
 str_speech = str(data)
 jieba.load_userdict('userdict.txt') #加载本地字典

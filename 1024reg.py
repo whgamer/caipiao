@@ -6,7 +6,7 @@ import requests
 
 class CodeSearch1024():
     def __init__(self, codeWithMask, parent=None):
-        self.url='http://1024ss.net/register.php'
+        self.url='https://www.t66y.com/register.php'
         self.codeWithMask = codeWithMask
         self.chars = '0123456789abcdefghijklmnopqrstuvwxyz'
         self.chars1 = '0123456789'#'abcdefghijklmnopqrstuvwxyz'
@@ -92,7 +92,7 @@ class CodeSearch1024():
         try:
             r = requests.post(url=self.url,data=postData)
             html = r.text.encode(r.encoding).decode('gbk')
-            if html.find(u'邀請碼錯誤')>-1:
+            if html.find(u'邀請碼不存在或已被使用')>-1:
                 return 'incorrect'
             else:
                 return 'found'
@@ -102,10 +102,10 @@ class CodeSearch1024():
 
 #用法示例
 #code = raw_input(u'Please input a code: ') # e.g.: *8m*9754yupt307t
-code = '*8m*9754yupt307t'
+code = 'ac*df1ba9c*e47e6'
 print ('code is'+ code)
 print ('Running')
 reg = CodeSearch1024(code)
 reg.start(True)
 
-raw_input()
+# raw_input()
