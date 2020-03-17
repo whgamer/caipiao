@@ -19,7 +19,7 @@ def moveFile(request_path,pathTo,size):
         fmtime = TimeStampToTime(os.path.getmtime(full_path))
 
         if os.path.isdir(full_path):
-            moveFile(full_path)
+            moveFile(full_path,pathTo,size)
         else:# file_list[1].append({'name':item,'fsize':fsize,'fmtime':fmtime})#'files'
 
             amendtime = os.stat(full_path).st_mtime
