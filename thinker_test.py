@@ -33,9 +33,13 @@ def moveFile(request_path,pathTo,size):
                     print('dir' + TimeStampToTime(time.time()) + ' '+ full_path+ str(file_size))
                     full_path_new = pathTo #r'D:\迅雷下载\test'
                     print(full_path + '  ' +full_path_new)
-
                     shutil.copy(full_path, full_path_new)
+                    text_var.set(full_path + full_path_new+ file_size )
             full_path =""
+def check_file(srcFilePath,target_FilePath):
+    src_size = os.path.getsize(srcFilePath)
+    targ_size = os.path.getsize(target_FilePath)
+    src_name = os.path.fi
 
 def show_file(contentVar_input):#选择文件夹
    file_name =tk.filedialog.askdirectory()# choose  dir
@@ -86,8 +90,12 @@ contentEntry3.grid(row=3,column =1)
 # contentEntry4.grid(row=4,column =1)
 
 Button(root, text='...', command=lambda:show_file(contentVar3)).grid(row=3, column=2, sticky=E, pady=4)#lambda make you  less function definition
+Button(root, text='关闭', command = root.destroy).grid(row=5, column=1, sticky=E, pady=4)
+Button(root, text='开始', command=lambda :moveFile(contentEntry1.get(),contentEntry3.get(),contentEntry2.get())).grid(row=5, column=0, sticky=E, pady=4)
 
-Button(root, text='关闭', command = root.destroy).grid(row=4, column=1, sticky=E, pady=4)
-Button(root, text='开始', command=lambda :moveFile(contentEntry1.get(),contentEntry3.get(),contentEntry2.get())).grid(row=4, column=0, sticky=E, pady=4)
 
+text_var = tk.StringVar(root)
+label_var = tk.Label(root, textvariable=text_var)
+label_var.grid(row=4,column =1)
+#full_path + full_path_new
 root.mainloop()
