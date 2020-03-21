@@ -33,6 +33,7 @@ def moveFile(request_path,pathTo,size):
                     print('dir' + TimeStampToTime(time.time()) + ' '+ full_path+ str(file_size))
                     full_path_new = pathTo #r'D:\迅雷下载\test'
                     print(full_path + '  ' +full_path_new)
+
                     shutil.copy(full_path, full_path_new)
             full_path =""
 
@@ -45,14 +46,15 @@ def show_file(contentVar_input):#选择文件夹
    else:
       contentVar1_='您没有选择任何文件'
       contentVar_input.set(contentVar1_)
-
+# def close_window (): # close window
+#     window.destroy()
 root =tk.Tk()
 root.geometry('300x270+400+100')
 root.resizable(True,True)
 root.title('实用小工具--文件筛选器')
 
 list_label =['源目录：','大小：','类型：','目标路径：']
-r =0
+r = 0
 for label_row in list_label:
    Label(root, text=label_row, fg='blue', font='Helvetica -12 bold', justify='left').grid(row=r,column =0)
    contentEntry1 = tk.Entry(root, textvariable='').grid(row =r,column =1)
@@ -85,9 +87,7 @@ contentEntry3.grid(row=3,column =1)
 
 Button(root, text='...', command=lambda:show_file(contentVar3)).grid(row=3, column=2, sticky=E, pady=4)#lambda make you  less function definition
 
-Button(root, text='关闭', command=root.quit).grid(row=4, column=1, sticky=E, pady=4)
+Button(root, text='关闭', command = root.destroy).grid(row=4, column=1, sticky=E, pady=4)
 Button(root, text='开始', command=lambda :moveFile(contentEntry1.get(),contentEntry3.get(),contentEntry2.get())).grid(row=4, column=0, sticky=E, pady=4)
-
-
 
 root.mainloop()
