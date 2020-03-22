@@ -34,7 +34,7 @@ def moveFile(request_path,pathTo,size):
                     full_path_new = pathTo #r'D:\迅雷下载\test'
                     print(full_path + '  ' +full_path_new)
                     shutil.copy(full_path, full_path_new)
-                    text_var.set(full_path + full_path_new+ file_size )
+                    text_var.set(full_path + full_path_new+ str(file_size) )# modi float to string type
             full_path =""
 def check_file(srcFilePath,target_FilePath):
     src_size = os.path.getsize(srcFilePath)
