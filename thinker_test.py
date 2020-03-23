@@ -15,6 +15,7 @@ def TimeStampToTime(timestamp):
 def moveFile(request_path,pathTo,size):
     for item in os.listdir(request_path):
         full_path = os.path.join(request_path, item)
+        src_FileName = check_file(item,pathTo)
         fsize = os.path.getsize(full_path)
         fmtime = TimeStampToTime(os.path.getmtime(full_path))
 
@@ -31,15 +32,32 @@ def moveFile(request_path,pathTo,size):
             if size != '':
                 if file_size >size:
                     print('dir' + TimeStampToTime(time.time()) + ' '+ full_path+ str(file_size))
-                    full_path_new = pathTo #r'D:\迅雷下载\test'
+                    full_path_new = pathTo + src_FileName #r'D:\迅雷下载\test'  src_FileName
                     print(full_path + '  ' +full_path_new)
                     shutil.copy(full_path, full_path_new)
                     text_var.set(full_path + full_path_new+ str(file_size) )# modi float to string type
             full_path =""
-def check_file(srcFilePath,target_FilePath):
-    src_size = os.path.getsize(srcFilePath)
-    targ_size = os.path.getsize(target_FilePath)
-    src_name = os.path.fi
+#demo
+# https://stackoverflow.com/questions/18383384/python-copy-files-to-a-new-directory-and-rename-if-file-name-already-exists
+def check_file(SrcFileName,target_FilePath):
+    # src_size = os.path.getsize(srcFilePath)
+    # targ_size = os.path.getsize(target_FilePath)
+    # src_name = os.path.fi
+    obj_target = target_FilePath +'/' + SrcFileName
+    if not os.path.isdir(target_FilePath):
+        print('It is not a FilePath. ')
+    if os.path.exists(obj_target):
+        ii = 1
+        while True:
+            if os.path.exists(obj_target):
+                ew_name = os.path.join(basedir, base, base + "_" + str(ii) + extension)
+                new_File_Name = os.path.join(SrcFileName + "_" + str(ii) + 'Rename')
+                break
+            ii += 1
+    else:
+        new_File_Name = SrcFileName
+
+    return new_File_Name
 
 def show_file(contentVar_input):#选择文件夹
    file_name =tk.filedialog.askdirectory()# choose  dir
