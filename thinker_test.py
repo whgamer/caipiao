@@ -32,7 +32,7 @@ def moveFile(request_path,pathTo,size):
             if size != '':
                 if file_size >size:
                     print('dir' + TimeStampToTime(time.time()) + ' '+ full_path+ str(file_size))
-                    full_path_new = pathTo + src_FileName #r'D:\迅雷下载\test'  src_FileName
+                    full_path_new = pathTo +"/" + src_FileName #r'D:\迅雷下载\test'  src_FileName
                     print(full_path + '  ' +full_path_new)
                     shutil.copy(full_path, full_path_new)
                     text_var.set(full_path + full_path_new+ str(file_size) )# modi float to string type
@@ -48,10 +48,12 @@ def check_file(SrcFileName,target_FilePath):
         print('It is not a FilePath. ')
     if os.path.exists(obj_target):
         ii = 1
+        # for base,extension in SrcFileName:
+        base, extension = os.path.splitext(SrcFileName)
         while True:
             if os.path.exists(obj_target):
-                ew_name = os.path.join(basedir, base, base + "_" + str(ii) + extension)
-                new_File_Name = os.path.join(SrcFileName + "_" + str(ii) + 'Rename')
+                # ew_name = os.path.join(basedir, base, base + "_" + str(ii) + extension)
+                new_File_Name = os.path.join(base + "_" + str(ii) + 'Rename'+ extension)
                 break
             ii += 1
     else:
