@@ -15,7 +15,8 @@ def TimeStampToTime(timestamp):
 def moveFile(request_path,pathTo,size):
     for item in os.listdir(request_path):
         full_path = os.path.join(request_path, item)
-        src_FileName = check_file(item,pathTo)
+        src_FileSize = os.path.getsize(full_path)
+        src_FileName = check_file(item,pathTo,src_FileSize)
         fsize = os.path.getsize(full_path)
         fmtime = TimeStampToTime(os.path.getmtime(full_path))
 
@@ -39,8 +40,8 @@ def moveFile(request_path,pathTo,size):
             full_path =""
 #demo
 # https://stackoverflow.com/questions/18383384/python-copy-files-to-a-new-directory-and-rename-if-file-name-already-exists
-def check_file(SrcFileName,target_FilePath):
-    # src_size = os.path.getsize(srcFilePath)
+def check_file(SrcFileName,target_FilePath,src_FileSize):
+    # src_size = os.path.getsize(SrcFileName)
     # targ_size = os.path.getsize(target_FilePath)
     # src_name = os.path.fi
     obj_target = target_FilePath +'/' + SrcFileName
@@ -53,8 +54,10 @@ def check_file(SrcFileName,target_FilePath):
         while True:
             if os.path.exists(obj_target):
                 # ew_name = os.path.join(basedir, base, base + "_" + str(ii) + extension)
-                new_File_Name = os.path.join(base + "_" + str(ii) + 'Rename'+ extension)
+                new_File_Name = os.path.join(base + "_" + str(ii) + 'Rename'+ str(src_FileSize)+ extension)
                 break
+            else:
+                continue
             ii += 1
     else:
         new_File_Name = SrcFileName
@@ -70,8 +73,6 @@ def show_file(contentVar_input):#选择文件夹
    else:
       contentVar1_='您没有选择任何文件'
       contentVar_input.set(contentVar1_)
-# def close_window (): # close window
-#     window.destroy()
 root =tk.Tk()
 root.geometry('300x270+400+100')
 root.resizable(True,True)
