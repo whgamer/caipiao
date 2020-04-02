@@ -12,7 +12,7 @@ import shutil
 def TimeStampToTime(timestamp):
   timeStruct = time.localtime(timestamp)
   return time.strftime('%Y-%m-%d %H:%M:%S',timeStruct)
-def moveFile(request_path,pathTo,size):
+def moveFile(request_path,pathTo,size):# there is a bug 路径下文件夹存在与上一目录文件相同名称则不会复制此文件夹下面文件
     for item in os.listdir(request_path):
         full_path = os.path.join(request_path, item)
         src_FileSize = os.path.getsize(full_path)
@@ -36,7 +36,7 @@ def moveFile(request_path,pathTo,size):
                     full_path_new = pathTo +"/" + src_FileName #r'D:\迅雷下载\test'  src_FileName
                     print(full_path + '  ' +full_path_new)
                     shutil.copy(full_path, full_path_new)
-                    text_var.set(full_path + full_path_new+ str(file_size) )# modi float to string type
+                    # text_var.set(full_path + full_path_new+ str(file_size) )# modi float to string type
             full_path =""
 #demo
 # https://stackoverflow.com/questions/18383384/python-copy-files-to-a-new-directory-and-rename-if-file-name-already-exists
@@ -56,8 +56,8 @@ def check_file(SrcFileName,target_FilePath,src_FileSize):
                 # ew_name = os.path.join(basedir, base, base + "_" + str(ii) + extension)
                 new_File_Name = os.path.join(base + "_" + str(ii) + 'Rename'+ str(src_FileSize)+ extension)
                 break
-            else:
-                continue
+            # else:
+            #     continue
             ii += 1
     else:
         new_File_Name = SrcFileName
