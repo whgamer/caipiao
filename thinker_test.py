@@ -106,9 +106,6 @@ contentVar3 =tk.StringVar(root,'')
 contentEntry3 =tk.Entry(root,textvariable=contentVar3)
 contentEntry3.grid(row=3,column =1)
 
-# contentVar4 =tk.StringVar(root,'')
-# contentEntry4 =tk.Entry(root,textvariable=contentVar4)
-# contentEntry4.grid(row=4,column =1)
 
 Button(root, text='...', command=lambda:show_file(contentVar3)).grid(row=3, column=2, sticky=E, pady=4)#lambda make you  less function definition
 Button(root, text='关闭', command = root.destroy).grid(row=5, column=1, sticky=E, pady=4)
