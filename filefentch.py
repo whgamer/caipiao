@@ -36,14 +36,14 @@ def getFile1(request_path):
 
             if file_size >100:
                 print('dir' + TimeStampToTime(time.time()) + ' '+ full_path+ str(file_size))
-                full_path_new = r'D:\迅雷下载\test'
+                full_path_new = r'D:\test'
                 print(full_path + '  ' +full_path_new)
                 shutil.copy(full_path, full_path_new)
             full_path =""
 
 
 dir = os.getcwd()
-request_path =r"D:\迅雷下载"
+request_path =r"D:\download-movie"
 file_list_name =os.listdir(request_path)
 file_list =[]
 # print(file_list_name)
