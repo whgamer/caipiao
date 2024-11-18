@@ -2,7 +2,7 @@ import os
 import re
 
 # 设置电影文件夹路径
-folder_path = 'F:\mov\movie'
+folder_path = 'F:\mov\cartoon'
 
 # 正则表达式，用于匹配并删除方括号及其中的内容
 pattern = re.compile(r'\[.*?\]')
